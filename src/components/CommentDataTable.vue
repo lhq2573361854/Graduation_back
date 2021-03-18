@@ -17,7 +17,7 @@
           <v-spacer></v-spacer>
           <v-text-field
               append-icon="mdi-magnify"
-              label="Search"
+              :label="$t('common.search')"
               single-line
               hide-details
               v-model="search"
@@ -83,7 +83,7 @@
                   >
                     <v-text-field
                         v-model="editedItem.commentUserId"
-                        label="commentUserId"
+                        :label="$t('common.commentUserId')"
                         @blur="$v.editedItem.commentUserId.$touch()"
                         @input="$v.editedItem.commentUserId.$touch()"
                         :error-messages="commentUserIdErrors"
@@ -97,7 +97,7 @@
                     <v-text-field
                         v-model="editedItem.commentTime"
                         disabled
-                        label="commentTime"
+                        :label="$t('common.commentTime')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -110,7 +110,7 @@
                         @blur="$v.editedItem.commentOtherId.$touch()"
                         @input="$v.editedItem.commentOtherId.$touch()"
                         :error-messages="commentOtherIdErrors"
-                        label="commentOtherId"
+                        :label="$t('common.commentOtherId')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -123,7 +123,7 @@
                         @blur="$v.editedItem.commentStars.$touch()"
                         @input="$v.editedItem.commentStars.$touch()"
                         :error-messages="commentStarsErrors"
-                        label="commentStars"
+                        :label="$t('common.commentStars')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -136,7 +136,7 @@
                         @blur="$v.editedItem.commentArticleId.$touch()"
                         @input="$v.editedItem.commentArticleId.$touch()"
                         :error-messages="commentArticleIdErrors"
-                        label="commentArticleId"
+                        :label="$t('common.commentArticleId')"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -262,16 +262,7 @@ export default {
       snackbar:false,
       snackbarText:'',
       timeout:600,
-      headers: [
-        { text: 'id', value: 'id'},
-        { text: '用户id', value: 'commentContent',},
-        { text: '评论的用户id', value: 'commentUserId' },
-        { text: '评论的时间', value: 'commentTime' },
-        { text: '被评论的用户id', value: 'commentOtherId' },
-        { text: '点赞次数', value: 'commentStars' },
-        { text: '文章id', value: 'commentArticleId' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
+
       editedItem: {
         id: '',
         commentContent: '',
@@ -326,10 +317,7 @@ export default {
 
     }
   },
-  created() {
 
-
-  },
   mounted() {
     this.getUserData()
   },
@@ -396,7 +384,6 @@ export default {
         } else {
           result = await request.post("/comment/addComment",this.editedItem)
           if(result.code === 200){
-            console.log(result.msg)
             this.editedItem.id = result.data.id
             this.editedItem.commentTime = result.data.commentTime
             this.desserts.push(this.editedItem)
@@ -425,6 +412,18 @@ export default {
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
+    headers(){
+      return [
+        { text: 'id', value: 'id'},
+        { text: `${this.$t("common.commentContent")}`, value: 'commentContent',},
+        { text: `${this.$t("common.commentUserId")}`, value: 'commentUserId' },
+        { text: `${this.$t("common.commentTime")}`, value: 'commentTime' },
+        { text: `${this.$t("common.commentOtherId")}`, value: 'commentOtherId' },
+        { text: `${this.$t("common.commentStars")}`, value: 'commentStars' },
+        { text: `${this.$t("common.commentArticleId")}`, value: 'commentArticleId' },
+        { text: `${this.$t("common.actions")}`, value: 'actions', sortable: false },
+      ]
+    } ,
     commentContentErrors(){
       const errors = []
       if (!this.$v.editedItem.commentContent.$dirty) return errors

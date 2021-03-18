@@ -92,6 +92,9 @@
           </v-container>
 
         </v-form>
+        <div>{{$t('message.greeting')}}</div>
+        <v-btn @click="toggleLocale"></v-btn>
+        <v-btn @click="toggleLocale2"></v-btn>
 
       </div>
   </v-container>
@@ -172,22 +175,24 @@ export default {
     }
   },
   methods: {
+    toggleLocale(){
+      this.$i18n.locale = 'en'
+
+    },
+    toggleLocale2(){
+      this.$i18n.locale = 'zh'
+    },
     //失去焦点事件
-    onEditorBlur(quill) {
-      console.log('editor blur!', quill)
+    onEditorBlur() {
     },
     //获得焦点事件
-    onEditorFocus(quill) {
-      console.log('editor focus!', quill)
+    onEditorFocus() {
     },
     // 准备富文本编辑器
-    onEditorReady(quill) {
-      console.log('editor ready!', quill)
+    onEditorReady() {
     },
     //内容改变事件
-    onEditorChange({ quill, html, text }) {
-      console.log('editor change!', quill, html, text)
-      this.content = html
+    onEditorChange() {
     },
     submit() {
       this.$v.$touch()

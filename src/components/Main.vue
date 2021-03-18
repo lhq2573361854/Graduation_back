@@ -10,13 +10,24 @@
 
     <v-app-bar app color="#1976d2" >
       <v-app-bar-nav-icon  @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title >{{ getTitle | defaultTitle | capitalize}}</v-toolbar-title>
+      <v-toolbar-title >{{ getLangTile | defaultTitle | capitalize}}</v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-switch
-            color="black"
-            @change="setTheme"
-            hide-details
-        ></v-switch>
+      <v-switch
+          color="red"
+          @change="setTheme"
+          hide-details
+          label="主题切换"
+          class="mx-2"
+          inset
+      ></v-switch>
+      <v-switch
+          color="black"
+          @change="setLang"
+          label="中英切换"
+          hide-details
+          inset
+          class="mx-2"
+      ></v-switch>
 
 
 
@@ -49,9 +60,6 @@ export default {
       active:false
     }
   },
-  created() {
-    console.log(this.$vuetify.theme.dark)
-  },
   methods:{
     setTitle(title){
       this.title = title
@@ -59,10 +67,16 @@ export default {
     setTheme(value){
       document.body.style.background= 'darkgreen'
       this.$vuetify.theme.dark  = value
+    },
+    setLang(value){
+      value ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh'
     }
   },
   computed:{
-    ...mapGetters(["getTitle"])
+    ...mapGetters(["getTitle"]),
+    getLangTile(){
+      return this.$t(`navbar.${this.getTitle}`)
+    }
   },
   components:{
     SideBar:()=> import('@/components/SideBar')

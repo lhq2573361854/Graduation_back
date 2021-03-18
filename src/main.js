@@ -17,6 +17,8 @@ import 'quill/dist/quill.bubble.css'
 import { ImageExtend } from 'quill-image-extend-module'
 import { ImageDrop } from 'quill-image-drop-module'
 import ImageResize from 'quill-image-resize-module'
+import {i18n} from "@/plugins/i18n";
+
 Quill.register('modules/ImageExtend', ImageExtend)
 Quill.register('modules/imageResize', ImageResize)
 Quill.register('modules/imageDrop', ImageDrop)
@@ -30,6 +32,7 @@ Vue.config.devtools = true;
 
 new Vue({
   router,
+  i18n,
   store,
   vuetify,
   render: h => h(App)

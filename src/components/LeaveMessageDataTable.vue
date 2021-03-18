@@ -17,7 +17,7 @@
           <v-spacer></v-spacer>
           <v-text-field
               append-icon="mdi-magnify"
-              label="Search"
+              :label="$t('common.search')"
               single-line
               hide-details
               v-model="search"
@@ -66,10 +66,10 @@
                   >
                     <v-text-field
                         v-model="editedItem.userId"
+                        :label="$t('common.userId')"
                         @blur="$v.editedItem.userId.$touch()"
                         @input="$v.editedItem.userId.$touch()"
                         :error-messages="userIdErrors"
-                        label="userId"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -82,7 +82,7 @@
                         @blur="$v.editedItem.acceptId.$touch()"
                         @input="$v.editedItem.acceptId.$touch()"
                         :error-messages="acceptIdErrors"
-                        label="acceptId"
+                        :label="$t('common.acceptId')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -94,7 +94,7 @@
                         @blur="$v.editedItem.messageTitle.$touch()"
                         @input="$v.editedItem.messageTitle.$touch()"
                         :error-messages="messageTitleErrors"
-                        label="messageTitle"
+                        :label="$t('common.messageTitle')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -123,7 +123,7 @@
                         @blur="$v.editedItem.messageEmail.$touch()"
                         @input="$v.editedItem.messageEmail.$touch()"
                         :error-messages="messageEmailErrors"
-                        label="messageEmail"
+                        :label="$t('common.messageEmail')"
                     ></v-text-field>
                   </v-col>
 
@@ -147,7 +147,8 @@
                         @blur="$v.editedItem.categoryId.$touch()"
                         @input="$v.editedItem.categoryId.$touch()"
                         :error-messages="categoryIdErrors"
-                        label="categoryId"
+                        :label="$t('common.categoryId')"
+
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -161,14 +162,15 @@
                   text
                   @click="close"
               >
-                Cancel
+                {{ $t("common.cancel") }}
               </v-btn>
               <v-btn
                   color="blue darken-1"
                   text
                   @click="save"
               >
-                Save
+                {{ $t("common.save") }}
+
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -303,17 +305,7 @@ export default {
         },
         theme: 'snow',
       },
-      headers: [
-        { text: 'id', value: 'id'},
-        { text: '用户id', value: 'userId',},
-        { text: '接受留言的用户id', value: 'acceptId' },
-        { text: '留言的时间', value: 'sendTime',},
-        { text: '留言的内容', value: 'message' },
-        { text: '留言的标题', value: 'messageTitle' },
-        { text: '留言的邮箱', value: 'messageEmail' },
-        { text: '留言的栏目id', value: 'categoryId' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
+
       editedItem: {
         id: '',
         userId: '',
@@ -432,6 +424,19 @@ export default {
   computed:{
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
+    headers(){
+      return [
+        { text: 'id', value: 'id'},
+        { text:  `${this.$t("common.userId")}`, value: 'userId',},
+        { text:  `${this.$t("common.acceptId")}`, value: 'acceptId' },
+        { text:  `${this.$t("common.sendTime")}`, value: 'sendTime',},
+        { text:  `${this.$t("common.message")}`, value: 'message' },
+        { text:  `${this.$t("common.messageTitle")}`, value: 'messageTitle' },
+        { text:  `${this.$t("common.messageEmail")}`, value: 'messageEmail' },
+        { text:  `${this.$t("common.categoryId")}`, value: 'categoryId' },
+        { text:  `${this.$t("common.actions")}`, value: 'actions', sortable: false },
+      ]
     },
     userIdErrors(){
       const errors = []

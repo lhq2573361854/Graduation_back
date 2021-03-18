@@ -17,7 +17,7 @@
           <v-spacer></v-spacer>
           <v-text-field
               append-icon="mdi-magnify"
-              label="Search"
+              :label="$t('common.search')"
               single-line
               hide-details
               v-model="search"
@@ -69,7 +69,8 @@
                         @blur="$v.editedItem.userId.$touch()"
                         @input="$v.editedItem.userId.$touch()"
                         :error-messages="userIdErrors"
-                        label="userId"
+                        :label="$t('common.userId')"
+
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -82,7 +83,8 @@
                         @blur="$v.editedItem.userRole.$touch()"
                         @input="$v.editedItem.userRole.$touch()"
                         :error-messages="userRoleErrors"
-                        label="userRole"
+                        :label="$t('common.userRole')"
+
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -96,14 +98,14 @@
                   text
                   @click="close"
               >
-                Cancel
+                {{ $t("common.cancel") }}
               </v-btn>
               <v-btn
                   color="blue darken-1"
                   text
                   @click="save"
               >
-                Save
+                {{ $t("common.save") }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -203,12 +205,7 @@ export default {
       snackbar:false,
       snackbarText:'',
       timeout:600,
-      headers: [
-        { text: 'id', value: 'id'},
-        { text: '用户id', value: 'userId',},
-        { text: '用户角色', value: 'userRole' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
+
       editedItem: {
         id: '',
         userId: '',
@@ -291,7 +288,6 @@ export default {
         } else {
            result = await request.post("/role/addRole",this.editedItem)
           if(result.code === 200){
-            console.log(result.msg)
             this.editedItem.id = result.data.id
             this.desserts.push(this.editedItem)
           }
@@ -305,6 +301,14 @@ export default {
   computed:{
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
+    headers(){
+      return [
+        { text: 'id', value: 'id'},
+        { text: `${this.$t("common.userId")}`, value: 'userId',},
+        { text: `${this.$t("common.userRole")}`, value: 'userRole' },
+        { text: `${this.$t("common.actions")}`, value: 'actions', sortable: false },
+      ]
     },
     userIdErrors(){
       const errors = []

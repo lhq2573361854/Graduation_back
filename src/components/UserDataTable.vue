@@ -17,7 +17,7 @@
           <v-spacer></v-spacer>
           <v-text-field
               append-icon="mdi-magnify"
-              label="Search"
+              :label="$t('common.search')"
               single-line
               hide-details
               v-model="search"
@@ -69,7 +69,7 @@
                         @blur="$v.editedItem.userName.$touch()"
                         @input="$v.editedItem.userName.$touch()"
                         :error-messages="userNameErrors"
-                        label="userName"
+                        :label="$t('common.userName')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -82,7 +82,8 @@
                         @blur="$v.editedItem.userPass.$touch()"
                         @input="$v.editedItem.userPass.$touch()"
                         :error-messages="userPassErrors"
-                        label="userPass"
+                        :label="$t('common.userPass')"
+
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -95,7 +96,7 @@
                         @blur="$v.editedItem.userEmail.$touch()"
                         @input="$v.editedItem.userEmail.$touch()"
                         :error-messages="userEmailErrors"
-                        label="userEmail"
+                        :label="$t('common.userEmail')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -108,7 +109,9 @@
                         @blur="$v.editedItem.userPhone.$touch()"
                         @input="$v.editedItem.userPhone.$touch()"
                         :error-messages="userPhoneErrors"
-                        label="userPhone"
+                        :label="$t('common.userPhone')"
+
+
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -121,7 +124,8 @@
                         @blur="$v.editedItem.userSex.$touch()"
                         @input="$v.editedItem.userSex.$touch()"
                         :error-messages="userSexErrors"
-                        label="userSex"
+                        :label="$t('common.userSex')"
+
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -134,7 +138,7 @@
                         @blur="$v.editedItem.userCountry.$touch()"
                         @input="$v.editedItem.userCountry.$touch()"
                         :error-messages="userCountryErrors"
-                        label="userCountry"
+                        :label="$t('common.userCountry')"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12">
@@ -152,7 +156,7 @@
                     <v-text-field
                         v-model="editedItem.registerTime"
                         disabled
-                        label="registerTime"
+                        :label="$t('common.registerTime')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -162,8 +166,8 @@
                   >
                     <v-text-field
                         v-model="editedItem.previousTime"
+                        :label="$t('common.previousTime')"
                         disabled
-                        label="previousTime"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -173,8 +177,8 @@
                   >
                     <v-text-field
                         v-model="editedItem.previousTime"
+                        :label="$t('common.previousTime')"
                         disabled
-                        label="previousTime"
                     ></v-text-field>
                   </v-col>
 
@@ -189,14 +193,14 @@
                   text
                   @click="close"
               >
-                Cancel
+                {{ $t("common.cancel") }}
               </v-btn>
               <v-btn
                   color="blue darken-1"
                   text
                   @click="save"
               >
-                Save
+                {{ $t("common.save") }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -307,22 +311,7 @@ export default {
       snackbar:false,
       snackbarText:'',
       timeout:600,
-      headers: [
-        {text: 'id', value: 'id'},
-        {text: '用户名', value: 'userName',},
-        { text: '密码', value: 'userPass' },
-        {text: '用户手机号', value: 'userPhone',},
-        { text: '邮箱', value: 'userEmail' },
-        { text: '性别', value: 'userSex' },
-        { text: '国家', value: 'userCountry' },
-        { text: '省', value: 'userProvince' },
-        { text: '城市', value: 'userCity' },
-        { text: '区县', value: 'userDistrict' },
-        { text: '注册时间', value: 'registerTime' },
-        { text: '登录时间', value: 'recentlyTime' },
-        { text: '上次登录时间', value: 'previousTime' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
+
       desserts: [
       ],
       editedItem: {
@@ -362,7 +351,6 @@ export default {
   },
   mounted() {
     this.getUserData()
-    console.log(this.$vuetify.theme.themes)
   },
   methods:{
     onChangeProvince(val){
@@ -434,13 +422,11 @@ export default {
       if (this.editedIndex > -1) {
         result = await request.post("/user/updateUserById",this.editedItem)
         if(result.code === 200){
-          console.log(result.msg)
           Object.assign(this.desserts[this.editedIndex], this.editedItem)
         }
       } else {
         result = await request.post("/code/addUser",this.editedItem)
         if(result.code === 200){
-          console.log(result.msg)
           this.editedItem.id = result.data.id
           this.editedItem.userPass = result.data.userPass
           this.editedItem.registerTime = result.data.registerTime
@@ -459,6 +445,24 @@ export default {
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
+    headers(){
+      return [
+        {text: 'id', value: 'id'},
+        {text: `${this.$t("common.userName")}`, value: 'userName',},
+        { text: `${this.$t("common.userPass")}`, value: 'userPass' },
+        {text: `${this.$t("common.userPhone")}`, value: 'userPhone',},
+        { text: `${this.$t("common.userEmail")}`, value: 'userEmail' },
+        { text: `${this.$t("common.userSex")}`, value: 'userSex' },
+        { text: `${this.$t("common.userCountry")}`, value: 'userCountry' },
+        { text: `${this.$t("common.userProvince")}`, value: 'userProvince' },
+        { text: `${this.$t("common.userCity")}`, value: 'userCity' },
+        { text: `${this.$t("common.userDistrict")}`, value: 'userDistrict' },
+        { text: `${this.$t("common.registerTime")}`, value: 'registerTime' },
+        { text: `${this.$t("common.recentlyTime")}`, value: 'recentlyTime' },
+        { text: `${this.$t("common.previousTime")}`, value: 'previousTime' },
+        { text: `${this.$t("common.actions")}`, value: 'actions', sortable: false },
+      ]
+    } ,
     userNameErrors(){
       const errors = []
       if (!this.$v.editedItem.userName.$dirty) return errors

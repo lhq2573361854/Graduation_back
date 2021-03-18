@@ -14,7 +14,7 @@ const routes = [
     children:[
       {
         path:'user',
-        name:'user',
+        name:'users',
         component:()=>import('@/components/UserDataTable'),
         meta:{
           keepAlive:true
@@ -101,7 +101,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to.name)
   store.commit('setTitle',to.name)
   next()
 })

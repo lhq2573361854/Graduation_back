@@ -1,0 +1,61 @@
+{
+  "message": {
+    "greeting": "你好"
+  },
+  "navbar": {
+    "home": "首页",
+    "authority": "权限",
+    "article": "文章",
+    "category": "栏目",
+    "users": "用户",
+    "leaveMessage": "留言",
+    "role": "角色",
+    "comment":"评论",
+    "title": "后台管理",
+    "subTitle": "基于vuetify的管理系统",
+    "main": "主页"
+  },
+  "common": {
+    "search": "搜索",
+    "userId": "用户id",
+    "userAuthority": "用户权限",
+    "categoryName": "栏目名",
+    "categoryAlias": "栏目别名",
+    "categoryDesc": "栏目描述",
+    "commentContent": "评论内容",
+    "commentUserId": "评论的用户id",
+    "commentTime": "评论时间",
+    "commentOtherId":"被评论的用户id",
+    "commentStars": "评论点赞数",
+    "commentArticleId": "评论的文章id",
+    "acceptId": "接受留言的用户",
+    "sendTime": "留言时间",
+    "message": "留言内容",
+    "messageTitle": "留言标题",
+    "messageEmail": "留言人的邮箱",
+    "categoryId": "留言栏目id",
+    "userRole": "用户角色",
+    "userName": "用户名",
+    "userPass": "用户密码",
+    "registerTime": "注册时间",
+    "previousTime": "上次登录时间",
+    "recentlyTime": "当前登录时间",
+    "userEmail": "用户邮箱",
+    "userPhone": "用户手机号",
+    "userSex": "用户性别",
+    "userCountry": "用户国家",
+    "userProvince": "用户所在省",
+    "userCity": "用户所在城市",
+    "userDistrict": "用户所在区县",
+    "articleTitle": "文章标题",
+    "articleDate": "文章发布时间",
+    "articleStars": "文章点赞数",
+    "articleAddress": "文章发布",
+    "articleContent": "文章内容",
+    "actions": "操作",
+    "cancel": "关闭",
+    "save": "保存提交"
+  }
+}
+
+

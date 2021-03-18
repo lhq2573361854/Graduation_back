@@ -17,7 +17,7 @@
           <v-spacer></v-spacer>
           <v-text-field
               append-icon="mdi-magnify"
-              label="Search"
+              :label="$t('common.search')"
               single-line
               hide-details
               v-model="search"
@@ -67,7 +67,7 @@
                         @blur="$v.editedItem.categoryName.$touch()"
                         @input="$v.editedItem.categoryName.$touch()"
                         :error-messages="categoryNameErrors"
-                        label="userId"
+                        :label="$t('common.userId')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -79,7 +79,8 @@
                         @blur="$v.editedItem.categoryAlias.$touch()"
                         @input="$v.editedItem.categoryAlias.$touch()"
                         :error-messages="categoryAliasErrors"
-                        label="userRole"
+                        :label="$t('common.userRole')"
+
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -91,7 +92,7 @@
                         @input="$v.editedItem.categoryDesc.$touch()"
                         :error-messages="categoryDescErrors"
                         v-model="editedItem.categoryDesc"
-                        label="userRole"
+                        :label="$t('common.userRole')"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -105,14 +106,14 @@
                   text
                   @click="close"
               >
-                Cancel
+                {{ $t("common.cancel") }}
               </v-btn>
               <v-btn
                   color="blue darken-1"
                   text
                   @click="save"
               >
-                Save
+                {{ $t("common.save") }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -213,13 +214,7 @@ export default {
       snackbar:false,
       snackbarText:'',
       timeout:600,
-      headers: [
-        { text: 'id', value: 'id'},
-        { text: '栏目名', value: 'categoryName',},
-        { text: '栏目别名', value: 'categoryAlias' },
-        { text: '栏目描述', value: 'categoryDesc' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
+
       editedItem: {
         id: '',
         categoryName: '',
@@ -235,7 +230,6 @@ export default {
     }
   },
   created() {
-
   },
   mounted() {
     this.getUserData()
@@ -245,7 +239,6 @@ export default {
       this.pageCount = $event
     },
     async getUserData(){
-      console.log("getUserData")
       const result = await request.get("/category/getAllCategory")
       this.desserts = result.data.map(item=> item)
     },
@@ -294,17 +287,15 @@ export default {
       if (this.editedIndex > -1) {
         result = await request.post("category/updateCategoryById",this.editedItem)
         if(result.code === 200){
-          console.log(result.msg)
-
+          Object.assign(this.desserts[this.editedIndex], this.editedItem)
         }
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
       } else {
         result = await request.post("category/addCategory",this.editedItem)
         if(result.code === 200){
-          console.log(result.msg)
+          this.editedItem.id = result.data.id
+          this.desserts.push(this.editedItem)
         }
-        this.editedItem.id = result.data.id
-        this.desserts.push(this.editedItem)
+
       }
       this.close()
       this.snackbarShow(result.msg)
@@ -318,6 +309,15 @@ export default {
   computed:{
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
+    headers(){
+      return [
+        { text: 'id', value: 'id'},
+        { text: `${this.$t("common.categoryName")}`, value: 'categoryName',},
+        { text: `${this.$t("common.categoryAlias")}`, value: 'categoryAlias' },
+        { text: `${this.$t("common.categoryDesc")}`, value: 'categoryDesc' },
+        { text: `${this.$t("common.actions")}`, value: 'actions', sortable: false },
+      ]
     },
     categoryNameErrors(){
       const errors = []

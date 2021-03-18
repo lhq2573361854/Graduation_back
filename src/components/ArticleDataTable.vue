@@ -17,7 +17,7 @@
           <v-spacer></v-spacer>
           <v-text-field
               append-icon="mdi-magnify"
-              label="Search"
+              :label="$t('common.search')"
               single-line
               hide-details
               v-model="search"
@@ -66,10 +66,11 @@
                     >
                       <v-text-field
                           v-model="editedItem.userId"
-                          label="userId"
+                          :label="$t('common.userId')"
                           @blur="$v.editedItem.userId.$touch()"
                           @input="$v.editedItem.userId.$touch()"
                           :error-messages="userIdErrors"
+                          autocomplete="off"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -82,7 +83,8 @@
                           @blur="$v.editedItem.articleTitle.$touch()"
                           @input="$v.editedItem.articleTitle.$touch()"
                           :error-messages="articleTitleErrors"
-                          label="articleTitle"
+                          :label="$t('common.articleTitle')"
+                          autocomplete="off"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -95,9 +97,6 @@
                           ref="myQuillEditor"
                           v-model="editedItem.articleContent"
                           :options="editorOption"
-                          @blur="onEditorBlur($event)"
-                          @focus="onEditorFocus($event)"
-                          @ready="onEditorReady($event)"
                       >
                       </quill-editor>
                     </v-col>
@@ -109,8 +108,7 @@
                       <v-text-field
                           v-model="editedItem.articleDate"
                           disabled
-
-                          label="articleDate"
+                          :label="$t('common.articleDate')"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -120,10 +118,11 @@
                     >
                       <v-text-field
                           v-model="editedItem.articleStars"
-                          label="articleStars"
+                          :label="$t('common.articleStars')"
                           @blur="$v.editedItem.articleStars.$touch()"
                           @input="$v.editedItem.articleStars.$touch()"
                           :error-messages="articleStarsErrors"
+                          autocomplete="off"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -133,10 +132,11 @@
                     >
                       <v-text-field
                           v-model="editedItem.articleAddress"
-                          label="articleAddress"
+                          :label="$t('common.articleAddress')"
                           @blur="$v.editedItem.articleAddress.$touch()"
                           @input="$v.editedItem.articleAddress.$touch()"
                           :error-messages="articleAddressErrors"
+                          autocomplete="off"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -146,10 +146,11 @@
                     >
                       <v-text-field
                           v-model="editedItem.categoryId"
+                          :label="$t('common.categoryId')"
                           @blur="$v.editedItem.categoryId.$touch()"
                           @input="$v.editedItem.categoryId.$touch()"
                           :error-messages="categoryIdErrors"
-                          label="categoryId"
+                          autocomplete="off"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -163,14 +164,15 @@
                     text
                     @click="close"
                 >
-                  Cancel
+                  {{ $t("common.cancel") }}
                 </v-btn>
                 <v-btn
                     color="blue darken-1"
                     text
                     @click="save"
                 >
-                  Save
+                  {{ $t("common.save") }}
+
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -255,11 +257,9 @@ export default {
     editedItem: {
       userId: {required},
       articleTitle: {required},
-      articleContent: {required},
       articleStars:{required},
       articleAddress:{required},
       categoryId:{required},
-
     }
   },
   data () {
@@ -276,17 +276,7 @@ export default {
       snackbar:false,
       snackbarText:'',
       timeout:600,
-      headers: [
-        {text: 'id', value: 'id'},
-        {text: '用户id', value: 'userId',},
-        { text: '文章的标题', value: 'articleTitle' },
-        {text: '文章的内容', value: 'articleContent',},
-        { text: '文章的发布时间', value: 'articleDate' },
-        { text: '文章点赞次数', value: 'articleStars' },
-        { text: '文章发布地点', value: 'articleAddress' },
-        { text: '栏目id', value: 'categoryId' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
+
       editedItem: {
         id: '',
         userId: '',
@@ -392,8 +382,12 @@ export default {
     async save () {
       let result;
       this.$v.$touch()
-      console.log(1)
       if(!this.$v.$invalid){
+        if(!this.editedItem.articleContent){
+          this.snackbarShow("内容不能为空")
+          return
+        }
+        console.log(123123)
         if (this.editedIndex > -1) {
           result = await request.post("/article/updateArticle",this.editedItem)
           if(result.code === 200){
@@ -418,7 +412,8 @@ export default {
     },
     onEditorReady() {
     },
-    onEditorChange() {
+    onEditorChange(e) {
+      console.log(e)
     },
     snackbarShow(msg){
       this.snackbar = true
@@ -429,6 +424,19 @@ export default {
   computed:{
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
+    headers(){
+      return [
+        { text: 'id', value: 'id'},
+        { text: `${this.$t("common.userId")}`, value: 'userId',},
+        { text: `${this.$t("common.articleTitle")}`, value: 'articleTitle' },
+        { text: `${this.$t("common.articleContent")}`, value: 'articleContent',},
+        { text: `${this.$t("common.articleDate")}`, value: 'articleDate' },
+        { text: `${this.$t("common.articleStars")}`, value: 'articleStars' },
+        { text: `${this.$t("common.articleAddress")}`, value: 'articleAddress' },
+        { text: `${this.$t("common.categoryId")}`, value: 'categoryId' },
+        { text: `${this.$t("common.actions")}`, value: 'actions', sortable: false },
+      ]
     },
     userIdErrors(){
       const errors = []

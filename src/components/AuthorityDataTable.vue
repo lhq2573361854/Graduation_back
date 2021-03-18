@@ -17,7 +17,7 @@
           <v-spacer></v-spacer>
           <v-text-field
               append-icon="mdi-magnify"
-              label="Search"
+              :label="$t('common.search')"
               single-line
               hide-details
               v-model="search"
@@ -67,7 +67,7 @@
                         @blur="$v.editedItem.userId.$touch()"
                         @input="$v.editedItem.userId.$touch()"
                         :error-messages="userIdErrors"
-                        label="userId"
+                        :label="$t('common.userId')"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -80,7 +80,8 @@
                         @blur="$v.editedItem.userAuthority.$touch()"
                         @input="$v.editedItem.userAuthority.$touch()"
                         :error-messages="userAuthorityErrors"
-                        label="userAuthority"
+                        :label="$t('common.userAuthority')"
+
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -94,14 +95,14 @@
                   text
                   @click="close"
               >
-                Cancel
+                {{ $t("common.cancel") }}
               </v-btn>
               <v-btn
                   color="blue darken-1"
                   text
                   @click="save"
               >
-                Save
+                {{ $t("common.save") }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -203,12 +204,7 @@ export default {
       snackbar:false,
       snackbarText:'',
       timeout:600,
-      headers: [
-        { text: 'id', value: 'id'},
-        { text: '用户id', value: 'userId',},
-        { text: '用户权限', value: 'userAuthority' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
+
       editedItem: {
         id: '',
         userId: '',
@@ -282,13 +278,11 @@ export default {
       if (this.editedIndex > -1) {
         result = await request.post("/authority/updateAuthority",this.editedItem)
         if(result.code === 200){
-          console.log(result.msg)
           Object.assign(this.desserts[this.editedIndex], this.editedItem)
         }
       } else {
         result = await request.post("/authority/addAuthority",this.editedItem)
         if(result.code === 200){
-          console.log(result.msg)
           this.editedItem.id = result.data.id
           this.desserts.push(this.editedItem)
         }
@@ -319,6 +313,14 @@ export default {
       !this.$v.editedItem.userAuthority.required && errors.push(' userAuthority must be required')
       return errors
     },
+    headers(){
+      return [
+        { text: 'id', value: 'id'},
+        { text: `${this.$t("common.userId")}`, value: 'userId',},
+        { text: `${this.$t("common.userAuthority")}`, value: 'userAuthority' },
+        { text: `${this.$t("common.actions")}`, value: 'actions', sortable: false },
+      ]
+    }
   },
   watch: {
     dialog (val) {
