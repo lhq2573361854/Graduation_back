@@ -13,6 +13,13 @@ const routes = [
     },
     children:[
       {
+        path:'',
+        name:'main',
+        meta:{
+          keepAlive:true
+        }
+      },
+      {
         path:'user',
         name:'users',
         component:()=>import('@/components/UserDataTable'),
@@ -69,14 +76,6 @@ const routes = [
 
         }
       },
-      {
-        path: 'post',
-        name: 'post',
-        component: () => import('@/components/PostFormCard'),
-        meta: {
-          keepAlive: true
-        },
-      }
     ]
   },
   {

@@ -180,8 +180,8 @@
             <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="closeDelete"> {{ $t("common.cancel") }}</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm"> {{ $t("common.ok") }}</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -441,38 +441,38 @@ export default {
     userIdErrors(){
       const errors = []
       if (!this.$v.editedItem.userId.$dirty) return errors
-      !this.$v.editedItem.userId.required && errors.push('userId must be required')
+      !this.$v.editedItem.userId.required && errors.push(this.$t('common.userId') + this.$t('errorMessage.required'))
       return errors
     },
     acceptIdErrors(){
       const errors = []
       if (!this.$v.editedItem.acceptId.$dirty) return errors
-      !this.$v.editedItem.acceptId.required && errors.push('acceptId must be required')
+      !this.$v.editedItem.acceptId.required && errors.push(this.$t('common.acceptId') + this.$t('errorMessage.required'))
       return errors
     },
     messageErrors(){
       const errors = []
       if (!this.$v.editedItem.message.$dirty) return errors
-      !this.$v.editedItem.message.required && errors.push('message must be required')
+      !this.$v.editedItem.message.required && errors.push(this.$t('common.message') + this.$t('errorMessage.required'))
       return errors
     },
     messageTitleErrors(){
       const errors = []
       if (!this.$v.editedItem.messageTitle.$dirty) return errors
-      !this.$v.editedItem.messageTitle.required && errors.push('messageTitle must be required')
+      !this.$v.editedItem.messageTitle.required && errors.push(this.$t('common.messageTitle') + this.$t('errorMessage.required'))
       return errors
     },
     messageEmailErrors(){
       const errors = []
-      if (!this.$v.editedItem.messageTitle.$dirty) return errors
-      !this.$v.editedItem.messageTitle.required && errors.push('messageEmail must be required')
-      !this.$v.editedItem.messageEmail.email && errors.push('email be not in a correct format')
+      if (!this.$v.editedItem.messageEmail.$dirty) return errors
+      !this.$v.editedItem.messageEmail.required && errors.push(this.$t('common.messageEmail') + this.$t('errorMessage.required'))
+      !this.$v.editedItem.messageEmail.email && errors.push(this.$t('common.messageEmail') + this.$t('errorMessage.format'))
       return errors
     },
     categoryIdErrors(){
       const errors = []
       if (!this.$v.editedItem.categoryId.$dirty) return errors
-      !this.$v.editedItem.categoryId.required && errors.push('categoryId must be required')
+      !this.$v.editedItem.categoryId.required && errors.push(this.$t('common.categoryId') + this.$t('errorMessage.required'))
       return errors
     },
   },

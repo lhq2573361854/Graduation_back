@@ -210,8 +210,8 @@
             <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="closeDelete">{{ $t("common.cancel") }}</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{ $t("common.ok") }}</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -316,12 +316,12 @@ export default {
       ],
       editedItem: {
         id: '',
-        userName: '213123sss',
-        userPass: '1123',
-        userPhone: '11114035039',
-        userEmail: '859071@qq.com',
-        userSex:'男',
-        userCountry:'中国',
+        userName: '',
+        userPass: '',
+        userPhone: '',
+        userEmail: '',
+        userSex:'',
+        userCountry:'',
         userProvince:'',
         userCity: '',
         userDistrict: '',
@@ -421,9 +421,7 @@ export default {
       let result;
       if (this.editedIndex > -1) {
         result = await request.post("/user/updateUserById",this.editedItem)
-        if(result.code === 200){
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        }
+        Object.assign(this.desserts[this.editedIndex], this.editedItem)
       } else {
         result = await request.post("/code/addUser",this.editedItem)
         if(result.code === 200){
@@ -434,7 +432,6 @@ export default {
           this.editedItem.recentlyTime = result.data.recentlyTime
           this.desserts.push(this.editedItem)
         }
-
       }
       this.close()
       this.snackbarShow(result.msg)
@@ -466,41 +463,41 @@ export default {
     userNameErrors(){
       const errors = []
       if (!this.$v.editedItem.userName.$dirty) return errors
-      !this.$v.editedItem.userName.required && errors.push('userName must be required')
+      !this.$v.editedItem.userName.required && errors.push(this.$t('common.userName') + this.$t('errorMessage.required'))
       !this.$v.editedItem.userName.minLength && errors.push('minLength must  less at 3')
       return errors
     },
     userPassErrors(){
       const errors = []
       if (!this.$v.editedItem.userPass.$dirty) return errors
-      !this.$v.editedItem.userPass.required && errors.push('userPass must be required')
+      !this.$v.editedItem.userPass.required && errors.push(this.$t('common.userPass') + this.$t('errorMessage.required'))
       !this.$v.editedItem.userPass.minLength && errors.push('minLength must  less at 3')
       return errors
     },
     userEmailErrors(){
       const errors = []
       if (!this.$v.editedItem.userEmail.$dirty) return errors
-      !this.$v.editedItem.userEmail.required && errors.push('userEmail must be required')
-      !this.$v.editedItem.userEmail.email && errors.push('email be not in a correct format')
+      !this.$v.editedItem.userEmail.required && errors.push(this.$t('common.userEmail') + this.$t('errorMessage.required'))
+      !this.$v.editedItem.userEmail.email && errors.push(this.$t('common.userEmail') + this.$t('errorMessage.format'))
       return errors
     },
     userPhoneErrors(){
       const errors = []
       if (!this.$v.editedItem.userPhone.$dirty) return errors
-      !this.$v.editedItem.userPhone.required && errors.push('userPhone must be required')
-      !this.$v.editedItem.userPhone.phone && errors.push('userPhone be not in a correct format')
+      !this.$v.editedItem.userPhone.required && errors.push(this.$t('common.userPhone') + this.$t('errorMessage.required'))
+      !this.$v.editedItem.userPhone.phone && errors.push(this.$t('common.userPhone') + this.$t('errorMessage.format'))
       return errors
     },
     userSexErrors(){
       const errors = []
       if (!this.$v.editedItem.userSex.$dirty) return errors
-      !this.$v.editedItem.userSex.required && errors.push('userSex must be required')
+      !this.$v.editedItem.userSex.required && errors.push(this.$t('common.userSex') + this.$t('errorMessage.required'))
       return errors
     },
     userCountryErrors(){
       const errors = []
       if (!this.$v.editedItem.userCountry.$dirty) return errors
-      !this.$v.editedItem.userCountry.required && errors.push('userCountry must be required')
+      !this.$v.editedItem.userCountry.required && errors.push(this.$t('common.userCountry') + this.$t('errorMessage.required'))
       return errors
     }
   },

@@ -79,7 +79,7 @@
                         @blur="$v.editedItem.categoryAlias.$touch()"
                         @input="$v.editedItem.categoryAlias.$touch()"
                         :error-messages="categoryAliasErrors"
-                        :label="$t('common.userRole')"
+                        :label="$t('common.categoryAlias')"
 
                     ></v-text-field>
                   </v-col>
@@ -92,7 +92,7 @@
                         @input="$v.editedItem.categoryDesc.$touch()"
                         :error-messages="categoryDescErrors"
                         v-model="editedItem.categoryDesc"
-                        :label="$t('common.userRole')"
+                        :label="$t('common.categoryDesc')"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -123,8 +123,8 @@
             <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="closeDelete">  {{ $t("common.save") }}</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{ $t("common.ok") }}</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -322,19 +322,19 @@ export default {
     categoryNameErrors(){
       const errors = []
       if (!this.$v.editedItem.categoryName.$dirty) return errors
-      !this.$v.editedItem.categoryName.required && errors.push('categoryName must be required')
+      !this.$v.editedItem.categoryName.required && errors.push(this.$t('common.categoryName') + this.$t('errorMessage.required'))
       return errors
     },
     categoryAliasErrors(){
       const errors = []
       if (!this.$v.editedItem.categoryAlias.$dirty) return errors
-      !this.$v.editedItem.categoryAlias.required && errors.push('categoryAlias must be required')
+      !this.$v.editedItem.categoryAlias.required && errors.push(this.$t('common.categoryAlias') + this.$t('errorMessage.required'))
       return errors
     },
     categoryDescErrors(){
       const errors = []
       if (!this.$v.editedItem.categoryDesc.$dirty) return errors
-      !this.$v.editedItem.categoryDesc.required && errors.push('categoryDesc must be required')
+      !this.$v.editedItem.categoryDesc.required && errors.push(this.$t('common.categoryDesc') + this.$t('errorMessage.required'))
       return errors
     },
 

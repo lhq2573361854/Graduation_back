@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire"  >
+  <v-app id="inspire"   >
     <router-view></router-view>
   </v-app>
 </template>
@@ -18,6 +18,6 @@ export default {
 
 <style lang="sass">
 .dark-theme
-  background-color: #303030 !important
+  background-color: #eeeeee !important
   color: rgba(0, 0, 0, 0.87)
 </style>

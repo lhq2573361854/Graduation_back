@@ -150,14 +150,14 @@
                   text
                   @click="close"
               >
-                Cancel
+                {{ $t("common.cancel") }}
               </v-btn>
               <v-btn
                   color="blue darken-1"
                   text
                   @click="save"
               >
-                Save
+                {{ $t("common.save") }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -167,8 +167,8 @@
             <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="closeDelete">  {{ $t("common.cancel") }}</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">  {{ $t("common.ok") }}</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -427,31 +427,31 @@ export default {
     commentContentErrors(){
       const errors = []
       if (!this.$v.editedItem.commentContent.$dirty) return errors
-      !this.$v.editedItem.commentContent.required && errors.push('commentContent must be required')
+      !this.$v.editedItem.commentContent.required && errors.push(this.$t('common.commentContent') + this.$t('errorMessage.required'))
       return errors
     },
     commentUserIdErrors(){
       const errors = []
       if (!this.$v.editedItem.commentUserId.$dirty) return errors
-      !this.$v.editedItem.commentUserId.required && errors.push('commentUserId must be required')
+      !this.$v.editedItem.commentUserId.required && errors.push(this.$t('common.commentUserId') + this.$t('errorMessage.required'))
       return errors
     },
     commentOtherIdErrors(){
       const errors = []
       if (!this.$v.editedItem.commentOtherId.$dirty) return errors
-      !this.$v.editedItem.commentOtherId.required && errors.push('commentOtherId must be required')
+      !this.$v.editedItem.commentOtherId.required && errors.push(this.$t('common.commentOtherId') + this.$t('errorMessage.required'))
       return errors
     },
     commentStarsErrors(){
       const errors = []
       if (!this.$v.editedItem.commentStars.$dirty) return errors
-      !this.$v.editedItem.commentStars.required && errors.push('commentStars must be required')
+      !this.$v.editedItem.commentStars.required && errors.push(this.$t('common.commentStars') + this.$t('errorMessage.required'))
       return errors
     },
     commentArticleIdErrors(){
       const errors = []
       if (!this.$v.editedItem.commentArticleId.$dirty) return errors
-      !this.$v.editedItem.commentArticleId.required && errors.push('commentArticleId must be required')
+      !this.$v.editedItem.commentArticleId.required && errors.push(this.$t('common.commentArticleId') + this.$t('errorMessage.required'))
       return errors
     },
   },

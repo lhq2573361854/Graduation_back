@@ -54,6 +54,12 @@
     "articleContent": "articleContent",
     "actions": "Action",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "ok": "ok"
+  },
+  "errorMessage": {
+    "required": " must be required",
+    "email": "email be not in a correct format"
+
   }
 }

@@ -32,7 +32,7 @@
     "sendTime": "留言时间",
     "message": "留言内容",
     "messageTitle": "留言标题",
-    "messageEmail": "留言人的邮箱",
+    "messageEmail": "留言邮箱",
     "categoryId": "留言栏目id",
     "userRole": "用户角色",
     "userName": "用户名",
@@ -50,11 +50,16 @@
     "articleTitle": "文章标题",
     "articleDate": "文章发布时间",
     "articleStars": "文章点赞数",
-    "articleAddress": "文章发布",
+    "articleAddress": "文章发布地点",
     "articleContent": "文章内容",
     "actions": "操作",
     "cancel": "关闭",
-    "save": "保存提交"
+    "save": "保存提交",
+    "ok": "完成"
+  },
+  "errorMessage": {
+    "required": "不能为空",
+    "format": "格式不正确"
   }
 }
 

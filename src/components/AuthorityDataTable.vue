@@ -104,7 +104,7 @@
               >
                 {{ $t("common.save") }}
               </v-btn>
-            </v-card-actions>
+            </v-card-actions>f
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
@@ -112,8 +112,8 @@
             <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="closeDelete">{{ $t("common.cancel") }}</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">ff</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -304,13 +304,13 @@ export default {
     userIdErrors(){
       const errors = []
       if (!this.$v.editedItem.userId.$dirty) return errors
-      !this.$v.editedItem.userId.required && errors.push('userId must be required')
+      !this.$v.editedItem.userId.required && errors.push(this.$t('common.userId') + this.$t('errorMessage.required'))
       return errors
     },
     userAuthorityErrors(){
       const errors = []
       if (!this.$v.editedItem.userAuthority.$dirty) return errors
-      !this.$v.editedItem.userAuthority.required && errors.push(' userAuthority must be required')
+      !this.$v.editedItem.userAuthority.required && errors.push(this.$t('common.userAuthority') + this.$t('errorMessage.required'))
       return errors
     },
     headers(){

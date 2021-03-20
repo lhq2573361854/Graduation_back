@@ -183,7 +183,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{ $t("common.ok") }}</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -447,31 +447,31 @@ export default {
     articleTitleErrors(){
       const errors = []
       if (!this.$v.editedItem.articleTitle.$dirty) return errors
-      !this.$v.editedItem.articleTitle.required && errors.push('articleTitle must be required')
+      !this.$v.editedItem.articleTitle.required && errors.push(this.$t('common.articleTitle') + this.$t('errorMessage.required'))
       return errors
     },
     articleContentErrors(){
       const errors = []
       if (!this.$v.editedItem.articleContent.$dirty) return errors
-      !this.$v.editedItem.articleContent.required && errors.push('articleContent must be required')
+      !this.$v.editedItem.articleContent.required && errors.push(this.$t('common.articleContent') + this.$t('errorMessage.required'))
       return errors
     },
     articleStarsErrors(){
       const errors = []
       if (!this.$v.editedItem.articleStars.$dirty) return errors
-      !this.$v.editedItem.articleStars.required && errors.push('articleStars must be required')
+      !this.$v.editedItem.articleStars.required && errors.push(this.$t('common.articleStars') + this.$t('errorMessage.required'))
       return errors
     },
     articleAddressErrors(){
       const errors = []
       if (!this.$v.editedItem.articleAddress.$dirty) return errors
-      !this.$v.editedItem.articleAddress.required && errors.push(' articleAddress must be required')
+      !this.$v.editedItem.articleAddress.required && errors.push(this.$t('common.articleAddress') + this.$t('errorMessage.required'))
       return errors
     },
     categoryIdErrors(){
       const errors = []
       if (!this.$v.editedItem. categoryId.$dirty) return errors
-      !this.$v.editedItem. categoryId.required && errors.push(' categoryId must be required')
+      !this.$v.editedItem. categoryId.required && errors.push(this.$t('common.categoryId') + this.$t('errorMessage.required'))
       return errors
     },
   },

@@ -4,12 +4,19 @@
         v-model="drawer"
         app
         width="280"
+        :mini-variant.sync="mini"
+        permanent
     >
-      <SideBar></SideBar>
+      <SideBar ></SideBar>
+
     </v-navigation-drawer>
 
-    <v-app-bar app color="#1976d2" >
-      <v-app-bar-nav-icon  @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar app  >
+      <v-app-bar-nav-icon  @click="mini = !mini" >
+        <v-btn  rounded  fab small>
+          <v-icon >{{mini?'mdi mdi-format-list-bulleted' : 'mdi-dots-vertical' }}</v-icon>
+        </v-btn>
+      </v-app-bar-nav-icon>
       <v-toolbar-title >{{ getLangTile | defaultTitle | capitalize}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-switch
@@ -56,8 +63,10 @@ export default {
   name:'Main',
   data(){
     return{
-      drawer:null,
-      active:false
+      drawer:true,
+      active:false,
+      mini: true,
+
     }
   },
   methods:{
@@ -98,9 +107,11 @@ export default {
 <style  lang="sass">
 .my-transition
   &-enter-active
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0s
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0s
   &-enter-to
-     opacity: 1
+    opacity: 1
+    transform: translateY(0px)
   &-enter
     opacity: 0
+    transform: translateY(-120px)
 </style>
