@@ -18,7 +18,7 @@ const request = Vue.axios.create({
     headers: {
         get: {
             'Content-Type': 'application/json',
-            "auth_token":'BearereyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4sdmlwIiwiYXV0aG9yaXR5IjoiL2FydGljbGUvKiosL2F1dGhvcml0eS8qKiwvY2F0ZWdvcnkvKiosL2NvbW1lbnQvKiosL2xlYXZlLW1lc3NhZ2UvKiosL3JvbGUvKiosL3Rlc3QvKiosL3VzZXIvKioiLCJzdWIiOiJ0aWFubGluZyIsImlhdCI6MTYxNTYyMzA1OCwiZXhwIjoxNjE2MjI3ODU4fQ.1fe7H_r6jHHiWFc9TIr-EC8_Rfq5FVMsbpUciYj_oes'
+            "auth_token":'BearereyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJhdXRob3JpdHkiOiIvYXJ0aWNsZS8qKiwvYXV0aG9yaXR5LyoqLC9jYXRlZ29yeS8qKiwvY29tbWVudC8qKiwvbGVhdmUtbWVzc2FnZS8qKiwvcm9sZS8qKiwvdGVzdC8qKiwvdXNlci8qKiIsInN1YiI6InRpYW5saW5nIiwiaWF0IjoxNjE2MjkxMTI1LCJleHAiOjE2MTY4OTU5MjV9.FJgavHZp_EAuYrMZbZFdLiKvUe4X_j0w2iAUm_X9vA8'
         },
         post: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',

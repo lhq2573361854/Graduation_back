@@ -1,48 +1,51 @@
 <template>
-  <v-card
-      class="mx-auto"
-      flat
-      height="100%"
-      style="background-image:url('https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-1.jpg')"
-  >
-      <v-list-item  three-line   class=" pl-2">
+  <div>
+      <v-list-item  three-line   class=" pl-2 py-2" >
         <v-list-item-avatar>
           <v-img
               :src="
           require('@/assets/vmd.svg')"
           />
         </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title class="title text-h5 text-center font-weight-bold ">
+        <v-list-item-content class="py-2">
+          <v-list-item-title class="title text-h5 text-center font-weight-bold " style="color: white">
             {{ $t('navbar.title') }}
           </v-list-item-title>
-          <v-list-item-subtitle class=" text-center" >
+          <v-list-item-subtitle class="text-center mt-4" style="color: sandybrown" >
             {{ $t('navbar.subTitle') }}
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
+      <div class="pa-2">
+        <v-divider  light style="border-color: whitesmoke" ></v-divider>
+      </div>
 
-      <v-divider></v-divider>
 
       <v-list
           dense
-      >
-        <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            link
-            :to="item.to"
-        >
-          <v-list-item-icon>
-            <v-icon :color="item.color">{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+          nav
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+      >
+        <v-list-item-group>
+          <v-list-item
+              v-for="item in items"
+              :key="item.title"
+              link
+              :to="item.to"
+              active-class="pink_text"
+          >
+            <v-list-item-icon>
+              <v-icon :color="item.color">{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title style="color: white">{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+
       </v-list>
-  </v-card>
+  </div>
 </template>
 
 
@@ -58,20 +61,24 @@ export default {
   computed:{
     items(){
       return [
-        { title: this.$t('navbar.home'), icon: 'mdi-account' ,color:'primary',to:'/admin'},
-        { title: this.$t('navbar.authority'), icon: 'mdi-shield-lock',color:'primary',to:'/admin/authority'},
-        { title: this.$t('navbar.article'), icon: 'mdi-newspaper-variant-multiple' ,color:'primary',to:'/admin/article'},
-        { title: this.$t('navbar.comment'), icon: 'mdi-chat',color:'primary',to:'/admin/comment'},
-        { title: this.$t('navbar.category'), icon: 'mdi-view-column' ,color:'primary',to:'/admin/category'},
-        { title: this.$t('navbar.users'), icon: 'mdi-account' ,color:'primary',to:'/admin/user'},
-        { title: this.$t('navbar.leaveMessage'), icon: 'mdi-help-box' ,color:'primary',to:'/admin/leaveMessage'},
-        { title: this.$t('navbar.role'), icon: 'mdi-human-queue',color:'primary',to:'/admin/role'},
+        { title: this.$t('navbar.home'), icon: 'mdi-account' ,color:'cyan',to:'/admin/index'},
+        { title: this.$t('navbar.authority'), icon: 'mdi-shield-lock',color:'cyan',to:'/admin/authority'},
+        { title: this.$t('navbar.article'), icon: 'mdi-newspaper-variant-multiple' ,color:'cyan',to:'/admin/article'},
+        { title: this.$t('navbar.comment'), icon: 'mdi-chat',color:'cyan',to:'/admin/comment'},
+        { title: this.$t('navbar.category'), icon: 'mdi-view-column' ,color:'cyan',to:'/admin/category'},
+        { title: this.$t('navbar.users'), icon: 'mdi-account' ,color:'cyan',to:'/admin/user'},
+        { title: this.$t('navbar.leaveMessage'), icon: 'mdi-help-box' ,color:'cyan',to:'/admin/leaveMessage'},
+        { title: this.$t('navbar.role'), icon: 'mdi-human-queue',color:'cyan',to:'/admin/role'},
+        { title: this.$t('navbar.profile'), icon: 'mdi-human-queue',color:'cyan',to:'/admin/profile'},
       ]
     }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="sass">
+.pink_text
+  background: #e91e63
+
 
 </style>

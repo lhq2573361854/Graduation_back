@@ -12,9 +12,11 @@ const routes = [
       keepAlive:true
     },
     children:[
+
       {
-        path:'',
-        name:'main',
+        path:'index',
+        name:'index',
+        component:()=>import('@/components/UserDataTable'),
         meta:{
           keepAlive:true
         }
@@ -71,6 +73,15 @@ const routes = [
         path:'category',
         name:'category',
         component:()=>import('@/components/CategoryDataTable'),
+        meta:{
+          keepAlive:true,
+
+        }
+      },
+      {
+        path:'profile',
+        name:'profile',
+        component:()=>import('@/components/UserProfile'),
         meta:{
           keepAlive:true,
 

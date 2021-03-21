@@ -13,6 +13,8 @@ import Quill from 'quill'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import VDistpicker from 'v-distpicker'
+
 
 import { ImageExtend } from 'quill-image-extend-module'
 import { ImageDrop } from 'quill-image-drop-module'
@@ -26,7 +28,7 @@ Quill.register('modules/imageDrop', ImageDrop)
 Vue.use(CKEditor).use(Vuelidate).use(Meta).use(VueBus).use(VueQuillEditor)
 Vue.config.productionTip = false
 Vue.config.devtools = true;
-
+Vue.component('v-distpicker', VDistpicker);
 
 
 

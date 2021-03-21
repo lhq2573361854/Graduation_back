@@ -6,8 +6,16 @@
         width="280"
         :mini-variant.sync="mini"
         permanent
+
     >
+      <template #img="prop">
+        <v-img v-bind="prop"
+               style="background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-1.jpg'); background-position: center center;"
+        />
+      </template>
       <SideBar ></SideBar>
+
+
 
     </v-navigation-drawer>
 

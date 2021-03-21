@@ -13,7 +13,8 @@
     "comment":"评论",
     "title": "后台管理",
     "subTitle": "基于vuetify的管理系统",
-    "main": "主页"
+    "main": "主页",
+    "profile": "个人中心"
   },
   "common": {
     "search": "搜索",
@@ -42,6 +43,7 @@
     "recentlyTime": "当前登录时间",
     "userEmail": "用户邮箱",
     "userPhone": "用户手机号",
+    "userAddress": "地址",
     "userSex": "用户性别",
     "userCountry": "用户国家",
     "userProvince": "用户所在省",
