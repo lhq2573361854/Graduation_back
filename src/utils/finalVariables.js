@@ -8,6 +8,7 @@ export const redirect_time=1000
 
 export const status_success = 200
 export const status_validate_failure = 410
+export const status_server_error_status = 500
 
 
 export const login_success_text = '登录成功,自动跳转到首页'

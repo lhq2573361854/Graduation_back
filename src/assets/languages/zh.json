@@ -57,7 +57,11 @@
     "actions": "操作",
     "cancel": "关闭",
     "save": "保存提交",
-    "ok": "完成"
+    "ok": "完成",
+    "submit": "提交",
+    "clear": "清空",
+    "validateCode": "验证码"
+
   },
   "errorMessage": {
     "required": "不能为空",

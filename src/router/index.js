@@ -111,7 +111,16 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  store.commit('setTitle',to.name)
-  next()
+  let userinfo = sessionStorage.getItem("currentUser") || localStorage.getItem("currentUser")
+  userinfo && store.commit("setCurrentUser",JSON.parse(userinfo))
+
+  console.log(!! JSON.parse(userinfo))
+  if(to.path !== "/login" && !! JSON.parse(userinfo) && !JSON.parse(userinfo).isAuth) {
+    next("/login")
+  }else{
+    store.commit('setTitle',to.name)
+    next()
+  }
+
 })
 export default router

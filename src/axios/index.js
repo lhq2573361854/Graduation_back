@@ -67,6 +67,7 @@ request.interceptors.response.use((response) => {
 }, (error) => {
     error.data = {}
     error.data.msg = '请求超时或服务器异常，请检查网络或联系管理员！'
+    error.data.code= 500
     return Promise.resolve(error)
 })
 

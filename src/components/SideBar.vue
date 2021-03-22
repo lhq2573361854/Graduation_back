@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
       <v-list-item  three-line   class=" pl-2 py-2" >
         <v-list-item-avatar>
           <v-img
@@ -8,23 +8,22 @@
           />
         </v-list-item-avatar>
         <v-list-item-content class="py-2">
-          <v-list-item-title class="title text-h5 text-center font-weight-bold " style="color: white">
+          <v-list-item-title class="title text-h5 text-center font-weight-bold ">
             {{ $t('navbar.title') }}
           </v-list-item-title>
-          <v-list-item-subtitle class="text-center mt-4" style="color: sandybrown" >
+          <v-list-item-subtitle class="text-center mt-4"  >
             {{ $t('navbar.subTitle') }}
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <div class="pa-2">
-        <v-divider  light style="border-color: whitesmoke" ></v-divider>
+        <v-divider    ></v-divider>
       </div>
 
 
       <v-list
           dense
           nav
-
       >
         <v-list-item-group>
           <v-list-item
@@ -33,13 +32,15 @@
               link
               :to="item.to"
               active-class="pink_text"
+              color="red darken-4"
+
           >
             <v-list-item-icon>
               <v-icon :color="item.color">{{ item.icon }}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title style="color: white">{{ item.title }}</v-list-item-title>
+              <v-list-item-title >{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -72,13 +73,14 @@ export default {
         { title: this.$t('navbar.profile'), icon: 'mdi-human-queue',color:'cyan',to:'/admin/profile'},
       ]
     }
+  },
+  components:{
   }
 }
 </script>
 
 <style scoped lang="sass">
-.pink_text
-  background: #e91e63
+
 
 
 </style>

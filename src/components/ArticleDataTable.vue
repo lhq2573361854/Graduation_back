@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <v-data-table
         :headers="headers"
         :items="desserts"
@@ -248,7 +248,7 @@
 <script>
 import request from "@/axios";
 import {replaceTag, sliceToLength} from "@/utils";
-import {mapMutations} from 'vuex'
+import {mapMutations,mapGetters} from 'vuex'
 import {validationMixin} from "vuelidate";
 import {required} from "vuelidate/lib/validators";
 export default {
@@ -344,7 +344,8 @@ export default {
       this.pageCount = $event
     },
     async getUserData(){
-     const result = await request.get("/article/getAllArticle")
+
+     const result = await request.get(`/article/getArticlesByUserId/${this.getUserInfoId}`)
       this.desserts = result.data.map(item=> item)
     },
     replaceTag(str){
@@ -422,9 +423,11 @@ export default {
   },
 
   computed:{
+    ...mapGetters(["getUserInfoId"]),
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
+
     headers(){
       return [
         { text: 'id', value: 'id'},

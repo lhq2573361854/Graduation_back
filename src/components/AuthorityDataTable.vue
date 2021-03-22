@@ -178,7 +178,7 @@
 <script>
 import request from "@/axios";
 import {replaceTag, sliceToLength} from "@/utils";
-import {mapMutations} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 import {validationMixin} from "vuelidate";
 import {required} from "vuelidate/lib/validators";
 
@@ -227,8 +227,9 @@ export default {
       this.pageCount = $event
     },
     async getUserData(){
-      const result = await request.get("/authority/getAllAuthority")
-      this.desserts = result.data.map(item=> item)
+      const result = await request.get(`/authority/getAuthorityByUserId/${this.getUserInfoId}`)
+      this.desserts.push(result.data)
+
     },
     replaceTag(str){
       return sliceToLength(replaceTag(str),10)
@@ -298,6 +299,7 @@ export default {
     },
   },
   computed:{
+    ...mapGetters(["getUserInfoId"]),
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },

@@ -11,6 +11,9 @@ export default {
     return{
       title:'123'
     }
+  },
+
+  methods:{
   }
 
 }

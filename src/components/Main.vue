@@ -1,27 +1,19 @@
 <template>
-  <div >
+  <div>
+
     <v-navigation-drawer
         v-model="drawer"
         app
         width="280"
         :mini-variant.sync="mini"
         permanent
-
     >
-      <template #img="prop">
-        <v-img v-bind="prop"
-               style="background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-1.jpg'); background-position: center center;"
-        />
-      </template>
       <SideBar ></SideBar>
-
-
-
     </v-navigation-drawer>
 
-    <v-app-bar app  >
+    <v-app-bar app color="light-blue accent-4" >
       <v-app-bar-nav-icon  @click="mini = !mini" >
-        <v-btn  rounded  fab small>
+        <v-btn  rounded  fab  small>
           <v-icon >{{mini?'mdi mdi-format-list-bulleted' : 'mdi-dots-vertical' }}</v-icon>
         </v-btn>
       </v-app-bar-nav-icon>
@@ -48,8 +40,8 @@
 
     </v-app-bar>
 
-    <v-main class="ma-4" >
-      <my-transition >
+    <v-main class="ma-4">
+      <my-transition  >
         <keep-alive>
           <router-view  v-if="$route.meta.keepAlive"></router-view>
         </keep-alive>
@@ -82,7 +74,6 @@ export default {
       this.title = title
     },
     setTheme(value){
-      document.body.style.background= 'darkgreen'
       this.$vuetify.theme.dark  = value
     },
     setLang(value){
