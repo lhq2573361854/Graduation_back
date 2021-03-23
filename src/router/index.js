@@ -113,11 +113,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   let userinfo = sessionStorage.getItem("currentUser") || localStorage.getItem("currentUser")
   userinfo && store.commit("setCurrentUser",JSON.parse(userinfo))
+  let auth = store.getters.getAuth
 
-  console.log(!! JSON.parse(userinfo))
-  if(to.path !== "/login" && !! JSON.parse(userinfo) && !JSON.parse(userinfo).isAuth) {
-    next("/login")
-  }else{
+  if(to.path !== "/login" && !auth){
+    next("/login");
+  }else {
     store.commit('setTitle',to.name)
     next()
   }
