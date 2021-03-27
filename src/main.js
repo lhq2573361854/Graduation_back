@@ -30,7 +30,8 @@ Vue.config.productionTip = false
 Vue.config.devtools = true;
 Vue.component('v-distpicker', VDistpicker);
 
-
+store.dispatch("getAllUserData")
+store.dispatch("getAllCategoryData")
 
 new Vue({
   router,

@@ -14,7 +14,8 @@
     "title": "后台管理",
     "subTitle": "基于vuetify的管理系统",
     "main": "主页",
-    "profile": "个人中心"
+    "profile": "个人中心",
+    "index": "首页"
   },
   "common": {
     "search": "搜索",
@@ -60,8 +61,10 @@
     "ok": "完成",
     "submit": "提交",
     "clear": "清空",
-    "validateCode": "验证码"
-
+    "validateCode": "验证码",
+    "editProfile": "个人信息",
+    "completeProfile": "您的信息",
+    "follow": "显示"
   },
   "errorMessage": {
     "required": "不能为空",

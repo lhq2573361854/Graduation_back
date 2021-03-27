@@ -3,7 +3,7 @@
     <v-data-table
         calculate-widths
         :headers="headers"
-        :items="desserts"
+        :items="$store.state.userList"
         :page.sync="page"
         :items-per-page="itemsPerPage"
         class="elevation-1"
@@ -207,7 +207,7 @@
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
-            <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+            <v-card-title class="headline">你确定要删除这个选项？</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="closeDelete">{{ $t("common.cancel") }}</v-btn>
@@ -279,6 +279,7 @@ import {validationMixin} from "vuelidate";
 import {required, email, minLength} from "vuelidate/lib/validators";
 import {phone} from "@/validate";
 import VDistpicker from 'v-distpicker'
+import {mapGetters, mapMutations, mapState} from 'vuex'
 
 export default {
   name:"UserDataTable",
@@ -311,9 +312,7 @@ export default {
       snackbar:false,
       snackbarText:'',
       timeout:600,
-
-      desserts: [
-      ],
+      desserts:this.userList,
       editedItem: {
         id: '',
         userName: '',
@@ -346,13 +345,8 @@ export default {
       },
     }
   },
-  created() {
-
-  },
-  mounted() {
-    this.getUserData()
-  },
   methods:{
+    ...mapMutations(["pushUserToUserList","deleteUserToUserList","updateUserToUserList"]),
     onChangeProvince(val){
       this.editedItem.userProvince = val.value
     },
@@ -370,21 +364,18 @@ export default {
       this.snackbar = true
       this.snackbarText = msg
     },
-    async getUserData(){
-     const result = await request.get("/user/getAllUser")
-      this.desserts = result.data
-    },
+
     replaceTag(str){
       return sliceToLength(replaceTag(str),10)
     },
     editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.userList.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.userList.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
@@ -392,7 +383,8 @@ export default {
    async deleteItemConfirm () {
       const result = await request.delete(`/user/deleteUserById/${this.editedItem.id}`)
       if(result.code === 200){
-        this.desserts.splice(this.editedIndex, 1)
+       // this.desserts.splice(this.editedIndex, 1)
+        this.deleteUserToUserList(this.editedIndex)
       }
      this.snackbarShow(result.msg)
      this.closeDelete()
@@ -421,7 +413,8 @@ export default {
       let result;
       if (this.editedIndex > -1) {
         result = await request.post("/user/updateUserById",this.editedItem)
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        // Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        this.updateUserToUserList({"editedIndex":this.editedIndex,"editedItem":this.editedItem})
       } else {
         result = await request.post("/code/addUser",this.editedItem)
         if(result.code === 200){
@@ -430,7 +423,8 @@ export default {
           this.editedItem.registerTime = result.data.registerTime
           this.editedItem.previousTime = result.data.previousTime
           this.editedItem.recentlyTime = result.data.recentlyTime
-          this.desserts.push(this.editedItem)
+          // this.desserts.push(this.editedItem)
+          this.pushUserToUserList(this.editedItem)
         }
       }
       this.close()
@@ -439,8 +433,10 @@ export default {
     },
   },
   computed:{
+    ...mapGetters(["getUserList"]),
+    ...mapState(['userList']),
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? '新建' : '修改'
     },
     headers(){
       return [

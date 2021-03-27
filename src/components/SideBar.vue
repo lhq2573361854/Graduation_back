@@ -62,7 +62,7 @@ export default {
   computed:{
     items(){
       return [
-        { title: this.$t('navbar.home'), icon: 'mdi-account' ,color:'cyan',to:'/admin/index'},
+        { title: this.$t('navbar.home'), icon: 'mdi-home' ,color:'cyan',to:'/admin/index'},
         { title: this.$t('navbar.authority'), icon: 'mdi-shield-lock',color:'cyan',to:'/admin/authority'},
         { title: this.$t('navbar.article'), icon: 'mdi-newspaper-variant-multiple' ,color:'cyan',to:'/admin/article'},
         { title: this.$t('navbar.comment'), icon: 'mdi-chat',color:'cyan',to:'/admin/comment'},
@@ -70,7 +70,7 @@ export default {
         { title: this.$t('navbar.users'), icon: 'mdi-account' ,color:'cyan',to:'/admin/user'},
         { title: this.$t('navbar.leaveMessage'), icon: 'mdi-help-box' ,color:'cyan',to:'/admin/leaveMessage'},
         { title: this.$t('navbar.role'), icon: 'mdi-human-queue',color:'cyan',to:'/admin/role'},
-        { title: this.$t('navbar.profile'), icon: 'mdi-human-queue',color:'cyan',to:'/admin/profile'},
+        { title: this.$t('navbar.profile'), icon: 'mdi-professional-hexagon',color:'cyan',to:'/admin/profile'},
       ]
     }
   },

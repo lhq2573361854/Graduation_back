@@ -164,7 +164,7 @@
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
-            <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+            <v-card-title class="headline">你确定要删除这个选项?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="closeDelete">  {{ $t("common.cancel") }}</v-btn>
@@ -175,7 +175,12 @@
         </v-dialog>
         </v-toolbar>
       </template>
-
+      <template v-slot:item.commentUserId="{ item }">
+        {{getUserName(item.commentUserId)}}
+      </template>
+      <template v-slot:item.commentOtherId="{ item }">
+        {{getUserName(item.commentOtherId)}}
+      </template>
       <template v-slot:item.commentContent="{ item }">
         {{replaceTag(item.commentContent)}}
       </template>
@@ -236,6 +241,7 @@ import request from "@/axios";
 import {replaceTag, sliceToLength} from "@/utils";
 import {validationMixin} from "vuelidate";
 import {required} from "vuelidate/lib/validators";
+import {mapGetters} from 'vuex'
 
 export default {
   name: "CommentDataTable",
@@ -409,8 +415,9 @@ export default {
     },
   },
   computed:{
+    ...mapGetters(["getUserName"]),
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? '新建' : '修改'
     },
     headers(){
       return [

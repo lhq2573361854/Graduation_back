@@ -14,7 +14,7 @@
           icon="mdi-account-outline"
         >
           <template #title>
-            Edit Profile — <small class="text-body-1">Complete your profile</small>
+            {{ $t('common.editProfile') }} — <small class="text-body-1">{{ $t('common.completeProfile') }}</small>
           </template>
 
           <v-form>
@@ -27,7 +27,9 @@
                 >
                   <v-text-field
                     color="purple"
+                    disabled
                     :label="$t('common.userName')"
+                    v-model="userInfo.userName"
                   />
                 </v-col>
 
@@ -36,8 +38,11 @@
                   md="5"
                 >
                   <v-text-field
+                    disabled
                     color="purple"
                     :label="$t('common.userEmail')"
+                    v-model="userInfo.userEmail"
+
                   />
                 </v-col>
                 <v-col
@@ -45,8 +50,11 @@
                     md="5"
                 >
                   <v-text-field
+                      disabled
                       color="purple"
                       :label="$t('common.userPass')"
+                      type="password"
+                      :value="userPass | passwordFilter"
                   />
                 </v-col>
                 <v-col
@@ -56,6 +64,8 @@
                   <v-text-field
                       color="purple"
                       :label="$t('common.userPhone')"
+                      v-model="userInfo.userPhone"
+                      disabled
                   />
                 </v-col>
 
@@ -66,6 +76,9 @@
                   <v-text-field
                     color="purple"
                     :label="$t('common.userCity')"
+                    v-model="userInfo.userCity"
+                    disabled
+
                   />
                 </v-col>
 
@@ -76,20 +89,36 @@
                   <v-text-field
                     color="purple"
                     :label="$t('common.userCountry')"
+                    v-model="userInfo.userCountry"
+                    disabled
+
+                  />
+                </v-col>
+                <v-col
+                    cols="12"
+                    md="5"
+                >
+                  <v-text-field
+                      color="purple"
+                      :label="$t('common.userDistrict')"
+                      v-model="userInfo.userDistrict"
+                      disabled
+
+                  />
+                </v-col>
+                <v-col
+                    cols="12"
+                    md="5"
+                >
+                  <v-text-field
+                      color="purple"
+                      :label="$t('common.userProvince')"
+                      v-model="userInfo.userProvince"
+                      disabled
+
                   />
                 </v-col>
 
-                <v-col
-                  cols="12"
-                  class="text-right"
-                >
-                  <v-btn
-                    color="primary"
-                    min-width="150"
-                  >
-                    Update Profile
-                  </v-btn>
-                </v-col>
               </v-row>
             </v-container>
           </v-form>
@@ -109,11 +138,11 @@
 
           <v-card-text class="text-center">
             <h6 class="text-h6 mb-2 text--secondary">
-              CEO / FOUNDER
+              {{this.role | indexCharAtUppercase }}
             </h6>
 
             <h4 class="text-h4 mb-3 text--primary">
-              John Leider
+              {{userInfo.userName | indexCharAtUppercase }}
             </h4>
 
             <p class="text--secondary">
@@ -126,7 +155,7 @@
               min-width="100"
               rounded
             >
-              Follow
+              {{ $t('common.follow') }}
             </v-btn>
           </v-card-text>
         </material-card>
@@ -136,10 +165,35 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
   export default {
     name: 'UserProfileView',
+
     components:{
       MaterialCard:()=> import("@/components/MaterialCard"),
+    },
+    data(){
+      return {
+        userInfo:{},
+        role:'',
+        userPass:''
+      }
+    },
+    created() {
+      this.userInfo = this.getUserInfo
+      this.role = this.getRole
+    },
+    computed:{
+      ...mapGetters(["getUserInfo","getRole"])
+    },
+    filters:{
+      passwordFilter(){
+          return '*'.repeat(8)
+      },
+      indexCharAtUppercase(value){
+        if(!value) return ''
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
     }
   }
 </script>

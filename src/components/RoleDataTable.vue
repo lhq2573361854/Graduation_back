@@ -123,9 +123,10 @@
         </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:item.articleContent="{ item }">
-        {{replaceTag(item.articleContent)}}
+      <template v-slot:item.userId="{ item }">
+        {{getUserName(item.userId)}}
       </template>
+
       <template v-slot:item.actions="{ item }">
         <v-icon
             small
@@ -183,6 +184,7 @@ import request from "@/axios"
 import {replaceTag, sliceToLength} from "@/utils"
 import {validationMixin} from "vuelidate"
 import {required} from "vuelidate/lib/validators"
+import {mapGetters} from 'vuex'
 export default {
   name: "RoleDataTable",
   mixins: [validationMixin],
@@ -240,13 +242,11 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
-
     deleteItem (item) {
       this.editedIndex = this.desserts.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
-
     async deleteItemConfirm () {
       const result = await request.delete(`/role/deleteRoleByUserId/${this.editedItem.id}`)
       if(result.code === 200){
@@ -255,7 +255,6 @@ export default {
       }
       this.closeDelete()
     },
-
     close () {
       this.dialog = false
       this.$v.$reset()
@@ -264,7 +263,6 @@ export default {
         this.editedIndex = -1
       })
     },
-
     closeDelete () {
       this.dialogDelete = false
       this.$nextTick(() => {
@@ -299,6 +297,7 @@ export default {
     },
   },
   computed:{
+    ...mapGetters(["getUserName"]),
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },

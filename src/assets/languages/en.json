@@ -13,7 +13,10 @@
     "comment":"Comment",
     "title": "Admin Application",
     "subTitle": "An admin dashboard base on Vuetify",
-    "main": "Main"
+    "main": "Main",
+    "profile": "Profile",
+    "index": "index"
+
   },
   "common": {
     "search": "Search",
@@ -60,7 +63,10 @@
     "profile": "Profile",
     "submit": "Submit",
     "clear": "Clear",
-    "validateCode": "validateCode"
+    "validateCode": "validateCode",
+    "editProfile": "Edit Profile ",
+    "completeProfile":"Complete your profile",
+    "follow": "FOLLOW"
 
 
   },

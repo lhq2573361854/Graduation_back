@@ -188,6 +188,12 @@
         </v-dialog>
         </v-toolbar>
       </template>
+      <template v-slot:item.userId="{ item }">
+        {{getUserName(item.userId)}}
+      </template>
+      <template v-slot:item.acceptId="{ item }">
+        {{getUserName(item.acceptId)}}
+      </template>
       <template v-slot:item.message="{ item }">
         {{replaceTag(item.message)}}
       </template>
@@ -249,6 +255,7 @@ import request from "@/axios";
 import {replaceTag, sliceToLength} from "@/utils";
 import {validationMixin} from "vuelidate";
 import {email, required} from "vuelidate/lib/validators";
+import {mapGetters} from 'vuex'
 export default {
   name: "LeaveMessageDataTable",
   mixins: [validationMixin],
@@ -422,6 +429,7 @@ export default {
     },
   },
   computed:{
+    ...mapGetters(["getUserName"]),
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },

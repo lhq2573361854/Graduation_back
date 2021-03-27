@@ -2,7 +2,7 @@
   <div>
     <v-data-table
         :headers="headers"
-        :items="desserts"
+        :items="$store.state.categoryList"
         :page.sync="page"
         :items-per-page="itemsPerPage"
         class="elevation-1"
@@ -191,6 +191,7 @@ import request from "@/axios";
 import { replaceTag, sliceToLength} from "@/utils";
 import {validationMixin} from 'vuelidate'
 import {required} from 'vuelidate/lib/validators'
+import {mapGetters, mapMutations, mapState} from 'vuex'
 export default {
   name: "CategoryDataTable",
   mixins: [validationMixin],
@@ -229,37 +230,34 @@ export default {
       },
     }
   },
-  created() {
-  },
-  mounted() {
-    this.getUserData()
-  },
   methods:{
+    ...mapMutations(["pushCategoryToCategoryList","deleteCategoryToCategoryList","updateCategoryToCategoryList"]),
     test($event){
       this.pageCount = $event
-    },
-    async getUserData(){
-      const result = await request.get("/category/getAllCategory")
-      this.desserts = result.data.map(item=> item)
     },
     replaceTag(str){
       return sliceToLength(replaceTag(str),10)
     },
     editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      // this.editedIndex = this.user.indexOf(item)
+
+       this.editedIndex = this.categoryList.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      // this.editedIndex = this.desserts.indexOf(item)
+       this.editedIndex = this.categoryList.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
 
     deleteItemConfirm () {
-      this.desserts.splice(this.editedIndex, 1)
+      // this.desserts.splice(this.editedIndex, 1)
+      this.deleteCategoryToCategoryList(this.editedIndex)
       this.closeDelete()
+
     },
 
     close () {
@@ -287,13 +285,16 @@ export default {
       if (this.editedIndex > -1) {
         result = await request.post("category/updateCategoryById",this.editedItem)
         if(result.code === 200){
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          // Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          this.updateCategoryToCategoryList({"editedIndex":this.editedIndex,"editedItem":this.editedItem})
         }
+
       } else {
         result = await request.post("category/addCategory",this.editedItem)
         if(result.code === 200){
           this.editedItem.id = result.data.id
-          this.desserts.push(this.editedItem)
+          //this.desserts.push(this.editedItem)
+          this.pushCategoryToCategoryList(this.editedItem)
         }
 
       }
@@ -307,6 +308,8 @@ export default {
     },
   },
   computed:{
+    ...mapGetters(["getCategoryList"]),
+    ...mapState(["categoryList"]),
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },

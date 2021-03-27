@@ -190,7 +190,9 @@
           </v-dialog>
         </v-toolbar>
       </template>
-
+      <template v-slot:item.userId="{ item }">
+        {{getUserName(item.userId)}}
+      </template>
       <template v-slot:item.articleContent="{ item }">
         {{replaceTag(item.articleContent)}}
       </template>
@@ -423,7 +425,7 @@ export default {
   },
 
   computed:{
-    ...mapGetters(["getUserInfoId"]),
+    ...mapGetters(["getUserInfoId","getUserName"]),
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
